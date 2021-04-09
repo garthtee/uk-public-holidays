@@ -1,7 +1,7 @@
 import React from 'react';
 import { toast } from 'react-toastify';
 import { Container, Row, Col, Form, Spinner, InputGroup } from 'react-bootstrap';
-import Meta from '../../Meta';
+import Meta from '../components/Meta';
 import HolidayList from '../components/HolidayList';
 
 const formatLocation = (location) => ({
@@ -11,7 +11,7 @@ const formatLocation = (location) => ({
 });
 
 const filterYears = (events, year) => events?.filter((s) =>
-s.date.includes(year));
+  s.date.includes(year));
 
 const BASE_URL = 'https://www.gov.uk/bank-holidays.json';
 
@@ -35,7 +35,7 @@ const Home = () => {
           ...keys.map((k) => formatLocation(k))
         ]);
       })
-      .catch((err) => {
+      .catch(() => {
         toast.error('Error fetching holidays.');
       });
   }, []);
