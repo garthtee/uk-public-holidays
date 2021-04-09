@@ -1,7 +1,8 @@
+import React from 'react';
 import Head from 'next/head';
 
 const Meta = () => (
-  <Head>
+  <Head key="app-meta">
     <title>UK Public Holidays</title>
     <link rel="icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon.png"/>

@@ -1,17 +1,10 @@
 import React from 'react';
-import { toast } from 'react-toastify';
-import { Container, Row, Col, Form, Spinner, InputGroup } from 'react-bootstrap';
+import {toast} from 'react-toastify';
+import {Container, Row, Col, Spinner} from 'react-bootstrap';
 import Meta from '../components/Meta';
 import HolidayList from '../components/HolidayList';
-
-const formatLocation = (location) => ({
-  label: location.split('-').map((word) => word === 'and' ? word :
-    `${word.substring(0, 1).toUpperCase()}${word.substring(1)}`).join(' '),
-  value: location,
-});
-
-const filterYears = (events, year) => events?.filter((s) =>
-  s.date.includes(year));
+import Options from '../components/Options';
+import {formatLocation} from '../utils/helpers';
 
 const BASE_URL = 'https://www.gov.uk/bank-holidays.json';
 
@@ -32,7 +25,7 @@ const Home = () => {
             label: "Select a location",
             value: '',
           },
-          ...keys.map((k) => formatLocation(k))
+          ...keys.map(formatLocation),
         ]);
       })
       .catch(() => {
@@ -58,28 +51,6 @@ const Home = () => {
     }
   }, [selected?.division]);
 
-  const onChangeLocation = React.useCallback((e) => {
-    const selectedLocation = e.target.value;
-
-    setSelected(selected?.year ? {
-        ...selected,
-        events: filterYears(
-          holidays[selectedLocation].events, selected?.year) 
-      } :
-      holidays[selectedLocation]
-    );
-  }, [selected, holidays]);
-  
-  const onChangeYear = React.useCallback((e) => {
-    const selectedYear = e.target.value;
-
-    setSelected({
-      ...selected,
-      year: selectedYear,
-      events: filterYears(holidays[selected.division]?.events, selectedYear),
-    });
-  }, [selected, holidays]);
-
   return (
     <Container>
       <Meta />
@@ -98,55 +69,13 @@ const Home = () => {
             </Col>
           </Row>
         ) : (
-          <Row className="justify-content-md-center text-center mt-3 mb-3">
-            <Col md={6} lg={4} className="mb-1">
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text id="inputGroup-location">Location</InputGroup.Text>
-                </InputGroup.Prepend>
-                <Form.Control 
-                  aria-label="Location"
-                  aria-describedby="inputGroup-location"
-                  as="select"
-                  custom
-                  onChange={onChangeLocation}
-                >
-                  {locations?.map(({label, value}) => (
-                    <option
-                      key={`location-${value}`}
-                      value={value}
-                    >
-                      {label}
-                    </option>
-                  ))}
-                </Form.Control>
-              </InputGroup>
-            </Col>
-            <Col md={6} lg={4}>
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text id="inputGroup-year">Year</InputGroup.Text>
-                </InputGroup.Prepend>
-                <Form.Control
-                  aria-label="Year"
-                  aria-describedby="inputGroup-year"
-                  as="select"
-                  custom
-                  disabled={!!!years}
-                  onChange={onChangeYear}
-                  >
-                  {years?.map((year) => (
-                    <option
-                      key={`year-${year}`}
-                      value={year}
-                    >
-                      {year}
-                    </option>
-                  ))}
-                </Form.Control>
-              </InputGroup>
-            </Col>
-          </Row>
+          <Options
+            setSelected={setSelected}
+            selected={selected}
+            holidays={holidays}
+            locations={locations}
+            years={years}
+          />
         )}
         <Row className="justify-content-md-center mb-3">
           <Col md={12} lg={6}>

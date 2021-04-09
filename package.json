@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "eslint src/**/*.js --fix"
   },
   "dependencies": {
     "bootstrap": "4.6.0",
@@ -15,5 +17,9 @@
     "react-dom": "17.0.2",
     "react-toastify": "7.0.3",
     "styled-components": "5.2.3"
+  },
+  "devDependencies": {
+    "eslint": "7.23.0",
+    "eslint-plugin-react": "7.23.2"
   }
 }
