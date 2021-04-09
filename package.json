@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -19,7 +21,10 @@
     "styled-components": "5.2.3"
   },
   "devDependencies": {
+    "@testing-library/cypress": "7.0.5",
+    "cypress": "7.0.1",
     "eslint": "7.23.0",
+    "eslint-plugin-cypress": "2.11.2",
     "eslint-plugin-react": "7.23.2"
   }
 }
