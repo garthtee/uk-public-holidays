@@ -18,7 +18,7 @@ const Home = () => {
     fetch(BASE_URL)
       .then(response => response.json())
       .then(data => {
-        setHolidays(addDatePast(data));
+        setHolidays(data);
 
         const keys = Object.keys(data);
         setLocations([{
