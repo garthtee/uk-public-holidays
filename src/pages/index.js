@@ -18,12 +18,12 @@ const Home = () => {
     fetch(BASE_URL)
       .then(response => response.json())
       .then(data => {
-        setHolidays(data);
+        setHolidays(addDatePast(data));
 
         const keys = Object.keys(data);
         setLocations([{
             label: "Select a location",
-            value: '',
+            value: '-1',
           },
           ...keys.map(formatLocation),
         ]);
@@ -71,6 +71,7 @@ const Home = () => {
         ) : (
           <Options
             setSelected={setSelected}
+            setLocations={setLocations}
             selected={selected}
             holidays={holidays}
             locations={locations}

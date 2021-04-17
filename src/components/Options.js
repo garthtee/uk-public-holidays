@@ -7,10 +7,15 @@ const Options = ({
   selected,
   holidays,
   locations,
+  setLocations,
   years,
 }) => {
   const onChangeLocation = React.useCallback((e) => {
     const selectedLocation = e.target.value;
+
+    if (!selected) {
+      setLocations(locations.filter((l) => l.value != '-1'));
+    }
 
     setSelected(selected?.year ? {
         ...selected,
