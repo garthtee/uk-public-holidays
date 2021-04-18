@@ -8,5 +8,4 @@ cache:
     - "node_modules"
 script:
 - npm run build
-- npm run dev
-- npm run cy:run
+- npm run dev & npm run cy:run
